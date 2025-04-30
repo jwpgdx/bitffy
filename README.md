@@ -1,6 +1,6 @@
-# DRTB (Drop the Bit)
+# Bitffy 
 
-**DRTB**는 빗썸 API와 통합된 암호화폐 거래 및 에어드랍 알림 도구입니다. 클라이언트 사이드에서 안전하게 거래할 수 있으며, 에어드랍에 대한 알림 기능을 제공하고 자동화된 거래 기능으로 쉽게 참여할 수 있습니다.
+**Bitffy**는 빗썸 API와 통합된 암호화폐 거래 및 에어드랍 알림 도구입니다. 클라이언트 사이드에서 안전하게 거래할 수 있으며, 에어드랍에 대한 알림 기능을 제공하고 자동화된 거래 기능으로 쉽게 참여할 수 있습니다.
 
 ## Key Features
 
@@ -19,7 +19,7 @@
 
 ## Installation Guide
 
-Follow the instructions to set up and run DRTB:
+Follow the instructions to set up and run Bitffy:
 
 ### Prerequisites
 
@@ -29,8 +29,8 @@ Follow the instructions to set up and run DRTB:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/jwpgdx/drtb.git
-cd drtb
+git clone https://github.com/jwpgdx/bitffy.git
+cd bitffy
 ```
 
 ### 2. Install dependencies
@@ -69,11 +69,11 @@ npm run dev
 ## Deployment
 
 - **Firebase Hosting**: The project is deployed using Firebase Hosting. It offers secure, fast, and scalable hosting for the app.
-- **Deployment URL**: [Visit the project](https://drtb.web.app)
+- **Deployment URL**: [Visit the project](https://bitffy.web.app)
 
 ## How to Contribute
 
-If you'd like to contribute to DRTB, feel free to fork the repository and submit a pull request. Please ensure that your code follows the existing style and includes tests where necessary.
+If you'd like to contribute to Bitffy, feel free to fork the repository and submit a pull request. Please ensure that your code follows the existing style and includes tests where necessary.
 
 ## Contact
 

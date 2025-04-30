@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "drtb",
+    "site": "bitffy",
     "public": "dist",
     "ignore": [
       "firebase.json",
@@ -50,5 +50,8 @@
     "ui": {
       "enabled": true
     }
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

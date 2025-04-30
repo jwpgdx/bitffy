@@ -2,14 +2,14 @@
 docker-compose up --build
 이걸로 실행
 
-docker build -t drtb:v2 .
+docker build -t bitffy:v2 .
 
 # 2. 이미지 실행
-docker run -p 3000:3000 drtb:v2
-docker run -p 3000:3000 -v "$(pwd)":/app drtb:v1
+docker run -p 3000:3000 bitffy:v2
+docker run -p 3000:3000 -v "$(pwd)":/app bitffy:v1
 docker-compose up --build
 # 2-1. 윈도우 실행 안될떄
-PS C:\Users\jwpg\Documents\GitHub\drtb> docker run -it -v "${PWD}:/app" drtb:v2 /bin/sh                   t -v "${PWD}:/app" drtb:v2 /bin/sh
+PS C:\Users\jwpg\Documents\GitHub\bitffy> docker run -it -v "${PWD}:/app" bitffy:v2 /bin/sh                   t -v "${PWD}:/app" bitffy:v2 /bin/sh
 >>
 # npx vite ---version 
 Need to install the following packages:
@@ -21,10 +21,10 @@ docker login
 
 
 # 2. 이미지 태그 설정
-docker tag drtb:v2 jwpgdx/drtb:v2
+docker tag bitffy:v2 jwpgdx/bitffy:v2
 
 # 3. 이미지 업로드
-docker push jwpgdx/drtb:v2
+docker push jwpgdx/bitffy:v2
 
 
 # 파이어베이스 functions 관련 

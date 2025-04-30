@@ -5,13 +5,13 @@ import { getStorage } from "firebase/storage";
 
 // Firebase 설정 객체
 const firebaseConfig = {
-  apiKey: "AIzaSyAwLtg6Cr3zM390WkvdRHYBYoJEe-efeIk",
-  authDomain: "drtb-beta.firebaseapp.com",
-  projectId: "drtb-beta",
-  storageBucket: "drtb-beta.appspot.com", // ✅ 스토리지 버킷 주소 확인
-  messagingSenderId: "330412859086",
-  appId: "1:330412859086:web:9f2b5a2f4ab9d4f55a1e19",
-  measurementId: "G-SDBKZ6H3J2",
+  apiKey: "AIzaSyAiKNqH0PSjeyn6NQYilIAxVo5t-obFAqI",
+  authDomain: "bitffy.firebaseapp.com",
+  projectId: "bitffy",
+  storageBucket: "bitffy.firebasestorage.app",
+  messagingSenderId: "984712678922",
+  appId: "1:984712678922:web:70f73494d385180e8659f3",
+  measurementId: "G-LBEKK66Z2F"
 };
 
 // Firebase 초기화
