@@ -4,9 +4,9 @@
       <div
         class="relative flex flex-1 flex-col items-center justify-center text-center text-white lg:items-start lg:text-left"
       >
-        <h1 class="main-text">Explore Crypto Galaxies</h1>
+        <h1 class="main-text">Explore<br>Crypto Galaxies</h1>
         <p class="sub-text">
-          다양한 에어드랍 이벤트를 참여하고, 미션과 보상으로 나만의 여정을 시작하세요.
+          다양한 에어드랍 이벤트를 참여하고,<br>미션과 보상으로 나만의 여정을 시작하세요.
           <!--
           The 'Evolution of Life' as told by BITFFY. Be a part of the dawn of a
           new civilization.
@@ -40,14 +40,14 @@ const onButtonClick = () => {
 .main-text {
   font-size: clamp(32px, 5.46875vw, 70px);
   line-height: 1.17143;
-  font-weight: 700;
-  //letter-spacing: -0.015em;
+  font-weight: 600;
+  letter-spacing: -0.015em;
   margin-bottom: clamp(14px, 1.95312vw, 28px);
-  font-family: "SamsungSharpSans", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .sub-text {
-  font-size: clamp(16px, 1.875vw, 24px);
+  font-size: clamp(16px, 1.8vw, 24px);
   line-height: clamp(1.5, 1.58333, 1.66667);
   font-weight: 400;
   letter-spacing: -0.015em;

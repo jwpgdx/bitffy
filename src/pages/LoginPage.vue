@@ -9,7 +9,7 @@
       />
 
       <div class="login-text">
-        Explore crypto galaxies.<br />Start on BITFFY
+        Explore Crypto Galaxies.<br />Start on BITFFY
       </div>
       <div class="h-8" />
       <button
@@ -66,7 +66,7 @@ const handleGoogleLogin = async () => {
 </script>
 <style lang="scss" scoped>
 .login-text {
-  font-family: "SamsungSharpSans", sans-serif;
-  @apply text-center text-3xl font-bold;
+  font-family: "Poppins", sans-serif;
+  @apply text-center text-3xl font-semibold;
 }
 </style>

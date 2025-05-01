@@ -9,7 +9,7 @@
 
     <div class="flex-1">
       <p class="text-[15px] lg:text-base">{{ market.korean_name }}</p>
-      <p class="text-xs text-zinc-500">{{ market.market }}</p>
+      <!--<p class="text-xs text-zinc-500">{{ market.market }}</p>-->
     </div>
     <div class="number-text flex items-center">
       <p v-if="isLoading" class="mr-2 text-base">-</p>
@@ -89,7 +89,7 @@ const priceChangeClass = computed(() => {
   font-size: 2rem;
 }
 .number-text {
-  font-family: "SamsungSharpSans", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
 </style>

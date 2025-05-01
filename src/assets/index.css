@@ -90,7 +90,10 @@
   overflow-wrap: break-word; /* 줄바꿈 시 단어 유지 */
 }
 body {
-  font-family: 'SamsungOneKorean', 'sans-serif';
+  font-family: 'pretendard', 'sans-serif';
+}
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
 }
 .Toastify__toast-container--bottom-center {
   left: 50%;

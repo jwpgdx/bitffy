@@ -73,8 +73,8 @@
   }
 }
 .footer-text {
-  font-family: "SamsungSharpSans", sans-serif;
-  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
   @apply text-3xl;
   
 }

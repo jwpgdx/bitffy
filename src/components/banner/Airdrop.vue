@@ -2,8 +2,8 @@
   <div class="flex flex-col items-center lg:items-start justify-between gap-10 lg:flex-row">
     <!-- 텍스트 컨텐츠 -->
     <div class="w-full lg:w-[50%]">
-      <h1 class="mb-4 text-3xl font-bold lg:text-5xl">
-        <span class="text-orange-600">LIVE</span> 에어드랍 이벤트
+      <h1 class="mb-4 text-3xl font-semibold lg:text-5xl">
+        <span class="text-orange-600 font-poppins font-semibold">LIVE</span> 에어드랍 이벤트
       </h1>
       <p class="mb-8 text-base lg:text-base">
         지금 진행 중인 모든 에어드랍 이벤트를 확인하세요!<br />
