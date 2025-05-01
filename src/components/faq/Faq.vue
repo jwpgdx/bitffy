@@ -1,18 +1,18 @@
 <template>
-  <div class="w-full mx-auto space-y-4">
+  <div class="mx-auto w-full space-y-4">
     <div
       v-for="(faq, index) in faqStore.faqs"
       :key="faq.id"
-      class="rounded-lg overflow-hidden transition-all duration-300"
+      class="overflow-hidden rounded-lg transition-all duration-300"
       :class="{ 'bg-orange-500': faq.isOpen }"
     >
       <button
         @click="faqStore.toggleFaq(faq.id)"
-        class="w-full px-4 py-4 text-left flex justify-between items-center"
+        class="flex w-full items-center justify-between px-4 py-4 text-left"
       >
         <div class="flex items-center gap-2">
           <div
-            class="w-5 h-5 rounded-[4px] flex items-center justify-center text-center text-xs"
+            class="flex h-5 w-5 items-center justify-center rounded-[4px] text-center text-xs"
             :class="{
               'border border-zinc-600': !faq.isOpen,
               'border-black bg-black': faq.isOpen,
@@ -32,7 +32,7 @@
           ]"
         >
           <svg
-            class="w-5 h-5"
+            class="h-5 w-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -55,7 +55,7 @@
         leave-from-class="opacity-100 max-h-screen"
         leave-to-class="opacity-0 max-h-0"
       >
-        <div v-show="faq.isOpen" class="px-11 pb-4 pt-2 text-zinc-800">
+        <div v-show="faq.isOpen" class="px-11 pb-4 pt-2 text-black">
           {{ faq.answer }}
         </div>
       </transition>
