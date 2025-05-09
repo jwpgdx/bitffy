@@ -43,3 +43,10 @@
   font-display: swap;
   src: url("../fonts/EBGaramond-Variable.ttf") format("truetype");
 }
+@font-face {
+  font-family: "NOOA";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/NOOA.ttf") format("truetype");
+}

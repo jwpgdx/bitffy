@@ -40,7 +40,7 @@
           'text-white': item.status === 'scheduled',
         }"
       >
-        <div class=" flex items-center gap-2 ">
+        <div class="date-text flex items-center gap-2 ">
           {{ formatDate(item.startAt) }}
           <svg
             class="size-2"
@@ -122,17 +122,10 @@ const getDdayText = (startAt: any, endAt: any, status: string) => {
 </script>
 
 <style lang="css" scoped>
-
 .number-text {
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: 0.015em;
-  font-family: "Poppins", sans-serif;
-}
-.number-text {
-  font-size: 28px;
-  font-weight: 550;
-  font-family: "EBGaramond", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  font-family: "NOOA", sans-serif;
 }
 .date-text {
   font-family: "Poppins", sans-serif;
