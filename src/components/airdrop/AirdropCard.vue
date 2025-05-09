@@ -35,12 +35,12 @@
       <div
         class="flex flex-col text-[12px] tracking-wide"
         :class="{
-          'text-white': item.status === 'ongoing',
+          'text-white':
+            item.status === 'ongoing' || item.status === 'scheduled',
           'text-zinc-500': item.status === 'ended',
-          'text-white': item.status === 'scheduled',
         }"
       >
-        <div class="date-text flex items-center gap-2 ">
+        <div class="date-text flex items-center gap-2">
           {{ formatDate(item.startAt) }}
           <svg
             class="size-2"
