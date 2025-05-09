@@ -62,12 +62,11 @@
           v-for="item in filteredList"
           :key="item.id"
           class="group relative cursor-pointer"
-          @click="goToDetail(item.id!)"
+          
         >
-          <AirdropCard :item="item" />
+          <AirdropCard :item="item" @click="goToDetail(item.id!)"/>
           <div
             v-if="authStore.isAdmin"
-            class="absolute right-2 top-2 hidden flex-col gap-1 group-hover:flex"
           >
             <button
               @click="goToEdit(item.id!)"

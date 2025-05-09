@@ -36,3 +36,10 @@
   font-display: swap;
   src: url("../fonts/Poppins-Bold.ttf") format("truetype");
 }
+@font-face {
+  font-family: "EBGaramond";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/EBGaramond-Variable.ttf") format("truetype");
+}

@@ -19,11 +19,16 @@ import { firestore } from "@/firebase";
 export interface AirdropItem {
   id?: string;
   title: string;
+  exchange: string;
+  reward: string;
   description: string;
   imageUrl: string;
   market: string;
   startAt: Timestamp;
   endAt: Timestamp;
+  rewardDate: Timestamp;
+
+  
   createdAt: Timestamp;
   status?: "scheduled" | "ongoing" | "ended";
 }
@@ -168,19 +173,28 @@ export const useAirdropStore = defineStore("airdropStore", {
     async addAirdrop(payload: {
       title: string;
       description: string;
+      exchange: string;
+      reward: string;
       imageFile: File;
       market: string;
       startAt: string;
       endAt: string;
+      rewardDate: string;
+
+      
     }) {
       const imageUrl = await this.uploadImageWithBase64(payload.imageFile, payload.market);
       await addDoc(collection(firestore, "airdrops"), {
         title: payload.title,
         description: payload.description,
+        exchange: payload.exchange,
+        reward: payload.reward,
         imageUrl,
         market: payload.market,
         startAt: Timestamp.fromDate(new Date(payload.startAt)),
         endAt: Timestamp.fromDate(new Date(payload.endAt)),
+        rewardDate: Timestamp.fromDate(new Date(payload.rewardDate)),
+
         createdAt: Timestamp.now(),
       });
       await this.fetchOngoingAirdrops();
@@ -190,10 +204,14 @@ export const useAirdropStore = defineStore("airdropStore", {
       id: string;
       title: string;
       description: string;
+      exchange: string;
+      reward: string;
       imageFile?: File;
       market: string;
       startAt: string;
       endAt: string;
+      rewardDate: string;
+
     }) {
       const docRef = doc(firestore, "airdrops", payload.id);
       let imageUrl = undefined;
@@ -203,11 +221,16 @@ export const useAirdropStore = defineStore("airdropStore", {
       }
 
       const updateData: any = {
-        title: payload.title,
-        description: payload.description,
-        market: payload.market,
+        title: payload.title ?? '',
+        description: payload.description ?? '',
+        exchange: payload.exchange ?? '',
+        reward: payload.reward ?? '',
+        market: payload.market ?? '',
         startAt: Timestamp.fromDate(new Date(payload.startAt)),
         endAt: Timestamp.fromDate(new Date(payload.endAt)),
+        rewardDate: Timestamp.fromDate(new Date(payload.rewardDate)),
+
+        
       };
 
       if (imageUrl) updateData.imageUrl = imageUrl;
