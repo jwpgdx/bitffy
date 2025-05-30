@@ -1,0 +1,28 @@
+# Logs
+logs/
+*.log
+
+# Dependencies
+node_modules/
+dist/
+dist-ssr/
+
+# Env
+.env
+.env.*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editor-specific
+.vscode/
+.idea/
+
+# Others
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
