@@ -6,7 +6,7 @@
       <img
         :src="`/images/icon-${item.exchange || 'bitffy'}.webp`"
         alt="거래소 로고"
-        class="h-4 w-fit object-contain"
+        class="h-5 w-fit object-contain lg:h-4"
       />
       <div class="w-[90%] text-left text-xl font-semibold lg:text-base">
         {{ item.title }}
