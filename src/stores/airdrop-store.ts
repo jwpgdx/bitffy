@@ -11,7 +11,8 @@ import {
   orderBy,
   limit,
   startAfter,
-  where, getDoc
+  where,
+  getDoc
 } from "firebase/firestore";
 import { getFunctions, httpsCallable } from "firebase/functions";
 import { firestore } from "@/firebase";
@@ -27,10 +28,13 @@ export interface AirdropItem {
   startAt: Timestamp;
   endAt: Timestamp;
   rewardDate: Timestamp;
-
-  
   createdAt: Timestamp;
   status?: "scheduled" | "ongoing" | "ended";
+}
+
+function toUTCDate(localDatetime: string): Date {
+  const local = new Date(localDatetime);
+  return new Date(local.getTime() - (new Date().getTimezoneOffset() * 60000));
 }
 
 export const useAirdropStore = defineStore("airdropStore", {
@@ -44,45 +48,45 @@ export const useAirdropStore = defineStore("airdropStore", {
     hasMoreOngoing: true,
     hasMoreEnded: true,
     hasMoreAll: true,
+    isUploading: false,
   }),
 
   actions: {
     async fetchAllAirdrops(limitCount = 6, nextPage = false) {
       const now = Timestamp.now();
-    
       let q = query(
         collection(firestore, "airdrops"),
         orderBy("endAt", "desc"),
         limit(limitCount)
       );
-    
+
       if (nextPage && this.allLast) {
         q = query(q, startAfter(this.allLast), limit(limitCount));
       }
-    
+
       const snapshot = await getDocs(q);
-    
       const docs = snapshot.docs.map((doc) => {
         const data = doc.data() as AirdropItem;
         const status: AirdropItem["status"] =
           data.endAt.toMillis() >= now.toMillis() ? "ongoing" : "ended";
-    
+
         return {
           id: doc.id,
           ...data,
           status,
         };
       });
-    
+
       if (nextPage) {
         this.allAirdrops.push(...docs);
       } else {
         this.allAirdrops = docs;
       }
-    
+
       this.allLast = snapshot.docs.at(-1) || null;
       this.hasMoreAll = snapshot.docs.length === limitCount;
     },
+
     async fetchOngoingAirdrops(limitCount = 6, nextPage = false) {
       const now = Timestamp.now();
       let q = query(
@@ -91,25 +95,24 @@ export const useAirdropStore = defineStore("airdropStore", {
         orderBy("endAt", "asc"),
         limit(limitCount)
       );
-    
+
       if (nextPage && this.ongoingLast) {
         q = query(q, startAfter(this.ongoingLast), limit(limitCount));
       }
-    
+
       const snapshot = await getDocs(q);
-    
       const docs = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
         status: "ongoing",
       })) as AirdropItem[];
-    
+
       if (nextPage) {
         this.ongoingAirdrops.push(...docs);
       } else {
         this.ongoingAirdrops = docs;
       }
-    
+
       this.ongoingLast = snapshot.docs.at(-1) || null;
       this.hasMoreOngoing = snapshot.docs.length === limitCount;
     },
@@ -122,28 +125,27 @@ export const useAirdropStore = defineStore("airdropStore", {
         orderBy("endAt", "desc"),
         limit(limitCount)
       );
-    
+
       if (nextPage && this.endedLast) {
         q = query(q, startAfter(this.endedLast), limit(limitCount));
       }
-    
+
       const snapshot = await getDocs(q);
-    
       const docs = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
         status: "ended",
       })) as AirdropItem[];
-    
+
       if (nextPage) {
         this.endedAirdrops.push(...docs);
       } else {
         this.endedAirdrops = docs;
       }
-    
+
       this.endedLast = snapshot.docs.at(-1) || null;
       this.hasMoreEnded = snapshot.docs.length === limitCount;
-    },    
+    },
 
     async uploadImageWithBase64(file: File, market: string): Promise<string> {
       if (!file) throw new Error("파일이 없습니다.");
@@ -180,8 +182,6 @@ export const useAirdropStore = defineStore("airdropStore", {
       startAt: string;
       endAt: string;
       rewardDate: string;
-
-      
     }) {
       const imageUrl = await this.uploadImageWithBase64(payload.imageFile, payload.market);
       await addDoc(collection(firestore, "airdrops"), {
@@ -191,10 +191,9 @@ export const useAirdropStore = defineStore("airdropStore", {
         reward: payload.reward,
         imageUrl,
         market: payload.market,
-        startAt: Timestamp.fromDate(new Date(payload.startAt)),
-        endAt: Timestamp.fromDate(new Date(payload.endAt)),
-        rewardDate: Timestamp.fromDate(new Date(payload.rewardDate)),
-
+        startAt: Timestamp.fromDate(toUTCDate(payload.startAt)),
+        endAt: Timestamp.fromDate(toUTCDate(payload.endAt)),
+        rewardDate: Timestamp.fromDate(toUTCDate(payload.rewardDate)),
         createdAt: Timestamp.now(),
       });
       await this.fetchOngoingAirdrops();
@@ -211,7 +210,6 @@ export const useAirdropStore = defineStore("airdropStore", {
       startAt: string;
       endAt: string;
       rewardDate: string;
-
     }) {
       const docRef = doc(firestore, "airdrops", payload.id);
       let imageUrl = undefined;
@@ -226,11 +224,9 @@ export const useAirdropStore = defineStore("airdropStore", {
         exchange: payload.exchange ?? '',
         reward: payload.reward ?? '',
         market: payload.market ?? '',
-        startAt: Timestamp.fromDate(new Date(payload.startAt)),
-        endAt: Timestamp.fromDate(new Date(payload.endAt)),
-        rewardDate: Timestamp.fromDate(new Date(payload.rewardDate)),
-
-        
+        startAt: Timestamp.fromDate(toUTCDate(payload.startAt)),
+        endAt: Timestamp.fromDate(toUTCDate(payload.endAt)),
+        rewardDate: Timestamp.fromDate(toUTCDate(payload.rewardDate)),
       };
 
       if (imageUrl) updateData.imageUrl = imageUrl;

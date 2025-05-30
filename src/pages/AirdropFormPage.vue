@@ -136,7 +136,13 @@ const formData = ref({
 onMounted(async () => {
   if (isEditMode.value && id) {
     const data = await airdropStore.fetchAirdropById(id);
+    console.log("data::", data);
     if (data) {
+      const toLocalISOString = (date: Date) => {
+        const local = new Date(date.getTime() + new Date().getTimezoneOffset() * -60000);
+        return local.toISOString().slice(0, 16);
+      };
+
       formData.value = {
         id: data.id || "",
         title: data.title,
@@ -145,15 +151,21 @@ onMounted(async () => {
         reward: data.reward,
         imageFile: null, // 이미지 파일은 직접 다시 업로드해야 함
         market: data.market,
-        startAt: new Date(data.startAt.toDate()).toISOString().slice(0, 16),
-        endAt: new Date(data.endAt.toDate()).toISOString().slice(0, 16),
-        rewardDate: data.rewardDate
-          ? new Date(data.rewardDate.toDate()).toISOString().slice(0, 16)
-          : `${defaultDate}T00:00`, // ✅ fallback
+        startAt: data.startAt?.toDate
+          ? toLocalISOString(data.startAt.toDate())
+          : `${defaultDate}T00:00`,
+        endAt: data.endAt?.toDate
+          ? toLocalISOString(data.endAt.toDate())
+          : `${defaultDate}T23:59`,
+        rewardDate: data.rewardDate?.toDate
+          ? toLocalISOString(data.rewardDate.toDate())
+          : `${defaultDate}T00:00`,
       };
     }
   }
 });
+
+
 const handleFileChange = (event: Event) => {
   const target = event.target as HTMLInputElement;
   if (target.files && target.files.length > 0) {

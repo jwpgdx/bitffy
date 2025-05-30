@@ -1,4 +1,3 @@
-// ✅ GSI(Google Identity Services) 기반으로 재작성
 import { ref } from 'vue'
 
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
@@ -60,6 +59,18 @@ export function useGoogleCalendar() {
     return map[code] || code
   }
 
+  // 🔧 "2025-05-03T00:00" → "2025-05-03"
+  const toDateOnly = (datetimeStr: string): string => {
+    return datetimeStr.split('T')[0]
+  }
+
+  // ✅ 하루 뒤 날짜 계산 (종료일 포함되도록)
+  const addOneDay = (dateStr: string): string => {
+    const date = new Date(dateStr)
+    date.setDate(date.getDate() + 1)
+    return date.toISOString().split('T')[0]
+  }
+
   const addCalendarEvents = async (formData: {
     exchange: string
     title: string
@@ -87,45 +98,33 @@ export function useGoogleCalendar() {
         })
       }
 
-      // access token 요청
       await new Promise<void>((resolve) => {
         tokenClient.callback = () => resolve()
         tokenClient.requestAccessToken()
       })
-
-      const startDate = new Date(formData.startAt)
-      const endDate = new Date(formData.endAt)
-      endDate.setDate(endDate.getDate() + 1) // ✅ 하루 추가
-
-      const rewardDate = new Date(formData.rewardDate)
-      const rewardEndDate = new Date(rewardDate)
-      rewardEndDate.setDate(rewardEndDate.getDate() + 1) // ✅ 하루 추가
-
-      // ✅ 타임존 차이로 하루 전날로 표시되는 문제 방지용 시간 설정
-      startDate.setHours(9, 0, 0, 0) // 오전 9시 고정
-      endDate.setHours(9, 0, 0, 0)
-      rewardDate.setHours(9, 0, 0, 0)
-      rewardEndDate.setHours(9, 0, 0, 0)
-
-      const start = startDate.toISOString().split('T')[0]
-      const end = endDate.toISOString().split('T')[0]
-      const reward = rewardDate.toISOString().split('T')[0]
-      const rewardEnd = rewardEndDate.toISOString().split('T')[0]
 
       const exchangeName = getExchangeName(formData.exchange)
 
       const events = [
         {
           summary: `${exchangeName}-${formData.title}`,
-          start: { date: start },
-          end: { date: end },
+          start: {
+            date: toDateOnly(formData.startAt),
+          },
+          end: {
+            date: addOneDay(formData.endAt), // 종료일 포함시키려면 +1일
+          },
           transparency: 'transparent',
           reminders: { useDefault: false },
         },
         {
           summary: `[🎁보상]${exchangeName}-${formData.title}`,
-          start: { date: reward },
-          end: { date: rewardEnd },
+          start: {
+            date: toDateOnly(formData.rewardDate),
+          },
+          end: {
+            date: addOneDay(formData.rewardDate),
+          },
           transparency: 'transparent',
           reminders: { useDefault: false },
         },
@@ -138,7 +137,7 @@ export function useGoogleCalendar() {
         })
       }
 
-      alert('✅ 구글 캘린더에 등록 완료!')
+      alert('✅ 구글 캘린더에 "하루 종일" 일정 등록 완료!')
     } catch (err) {
       console.error('❌ Google Calendar 오류:', err)
       alert('캘린더 등록 실패! 콘솔을 확인하세요.')
