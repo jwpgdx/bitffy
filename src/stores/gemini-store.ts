@@ -16,7 +16,7 @@ export const useGeminiStore = defineStore("geminiStore", {
       });
 
       const prompt = `
-You are an assistant that extracts airdrop event information from HTML content.
+You are an assistant that extracts airdrop event information from HTML content and converts it to clean markdown format.
 
 Your task is to parse the following HTML and return the extracted data in strict JSON format. Use the following schema:
 
@@ -24,6 +24,10 @@ Your task is to parse the following HTML and return the extracted data in strict
   "type": "object",
   "properties": {
     "title": { "type": "string" },
+    "content": { 
+      "type": "string",
+      "description": "Clean markdown version of the description content, removing HTML tags and formatting as proper markdown"
+    },
     "exchange": { 
       "type": "string",
       "description": "One of the following values ONLY: 'bithumb', 'coinone', 'binance', 'korbit', 'upbit'"
@@ -49,10 +53,19 @@ Your task is to parse the following HTML and return the extracted data in strict
       "description": "Airdrop reward payout date in ISO 8601 format: YYYY-MM-DDTHH:MM"
     }
   },
-  "required": ["title", "exchange", "reward", "market", "startAt", "endAt", "rewardDate"]
+  "required": ["title", "content", "exchange", "reward", "market", "startAt", "endAt", "rewardDate"]
 }
 
 Rules:
+- Convert HTML content to clean, well-formatted markdown:
+  - Convert <h1>, <h2>, etc. to # ## headers
+  - Convert <strong>, <b> to **bold**
+  - Convert <em>, <i> to *italic*
+  - Convert <ul><li> to - bullet points
+  - Convert <ol><li> to 1. numbered lists
+  - Convert <a href="url">text</a> to [text](url)
+  - Convert <br> to line breaks
+  - Remove unnecessary HTML tags and clean up formatting
 - Do not add any prefix like '총' to reward. Just the numeric value and token.
 - For 'market', return only the token symbol before any dash (e.g., 'ACS' from 'ACS-KRW').
 - For 'exchange', map names like '빗썸' to the proper value from: 'bithumb', 'coinone', 'binance', 'korbit', 'upbit'.

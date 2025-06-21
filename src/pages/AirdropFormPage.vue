@@ -185,13 +185,13 @@ const analyzeWithAI = async () => {
 
     // ✅ formData에 직접 반영 (실제 form에 보이도록)
     formData.value.title = result.title || "";
+    formData.value.description = result.content || ""; // 🔥 HTML을 마크다운으로 변환된 content로 교체
     formData.value.exchange = result.exchange || "";
     formData.value.reward = result.reward || "";
     formData.value.market = result.market || "";
     formData.value.startAt = result.startAt?.slice(0, 16) || `${defaultDate}T00:00`;
     formData.value.endAt = result.endAt?.slice(0, 16) || `${defaultDate}T23:59`;
     formData.value.rewardDate = result.rewardDate?.slice(0, 16) || `${defaultDate}T00:00`;
-
     
     // airdropStore에도 반영 (필요하다면)
   } catch (error) {
