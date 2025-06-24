@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useAirdropStore } from "@/stores/airdrop-store";
 import { useAuthStore } from "@/stores/auth-store";
@@ -44,18 +44,38 @@ const store = useAirdropStore();
 const authStore = useAuthStore();
 
 const airdrop = ref<any | null>(null);
+const renderedDescription = ref<string>("");
 const id = route.params.id as string;
 
-// 마크다운을 안전한 HTML로 변환하는 computed 속성
-const renderedDescription = computed(() => {
-  if (!airdrop.value?.description) return "";
+// 마크다운을 안전한 HTML로 변환하는 함수
+const renderMarkdown = async (markdown: string) => {
+  if (!markdown) {
+    renderedDescription.value = "";
+    return;
+  }
 
-  // 마크다운을 HTML로 변환 (동기 처리 방식 사용)
-  const htmlContent = marked.parse(airdrop.value.description);
+  try {
+    // 마크다운을 HTML로 변환 (async 처리)
+    const htmlContent = await marked(markdown);
+    
+    // XSS 공격 방지를 위해 HTML 새니타이즈
+    renderedDescription.value = DOMPurify.sanitize(htmlContent);
+  } catch (error) {
+    console.error("마크다운 렌더링 오류:", error);
+    renderedDescription.value = "";
+  }
+};
 
-  // XSS 공격 방지를 위해 HTML 새니타이즈
-  return DOMPurify.sanitize(htmlContent);
-});
+// airdrop 데이터가 변경될 때마다 마크다운 렌더링
+watch(
+  () => airdrop.value?.description,
+  (newDescription) => {
+    if (newDescription) {
+      renderMarkdown(newDescription);
+    }
+  },
+  { immediate: true }
+);
 
 const fetchDetail = async () => {
   try {
