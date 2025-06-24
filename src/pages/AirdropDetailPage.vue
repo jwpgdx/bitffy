@@ -30,8 +30,6 @@
   </div>
 </template>
 
-
-
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -52,8 +50,8 @@ const id = route.params.id as string;
 const renderedDescription = computed(() => {
   if (!airdrop.value?.description) return "";
 
-  // 마크다운을 HTML로 변환
-  const htmlContent = marked(airdrop.value.description);
+  // 마크다운을 HTML로 변환 (동기 처리 방식 사용)
+  const htmlContent = marked.parse(airdrop.value.description);
 
   // XSS 공격 방지를 위해 HTML 새니타이즈
   return DOMPurify.sanitize(htmlContent);
@@ -153,5 +151,4 @@ onMounted(() => {
   list-style: none;
   position: relative;
 }
-
 </style>
