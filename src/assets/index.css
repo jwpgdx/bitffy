@@ -11,7 +11,7 @@
     --toastify-color-dark: #fff;
     --toastify-text-color-dark: #000;
     --toastify-toast-min-height: 48px;
-    --background: 210 8% 4%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 100%; /* 다크 모드: 흰색 글씨 */
 
     --muted: 210 40% 96.1%;
@@ -134,3 +134,6 @@ body {
   }
 }
 
+#app {
+  overflow-x: hidden;
+}

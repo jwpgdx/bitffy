@@ -2,26 +2,29 @@
 <template>
   <div
     @click="goToOrderPage"
-    class="flex h-16 cursor-pointer items-center rounded-sm px-4 text-white hover:bg-zinc-900"
+    class="group relative flex h-14 cursor-pointer items-center rounded-sm px-4 text-white hover:bg-zinc-900"
   >
     <!-- market.isVisible일 때만 이미지 로드 -->
-    <Coin :market="market.market" class="mr-3 size-5 lg:mr-4 lg:size-6" />
-
+    <Coin :market="market.market" class="mr-3 size-5 lg:mr-4" />
     <div class="flex-1">
-      <p class="text-[15px] lg:text-base">{{ market.korean_name }}</p>
+      <p class="text-[14px] text-[#d0d6e0] group-hover:text-white">
+        {{ market.korean_name }}
+      </p>
       <!--<p class="text-xs text-zinc-500">{{ market.market }}</p>-->
     </div>
-    <div class="number-text flex items-center">
-      <p v-if="isLoading" class="mr-2 text-base">-</p>
+    <div
+      class="number-text flex items-center text-[14px] text-[#8a8f98] group-hover:text-white"
+    >
+      <p v-if="isLoading" class="mr-2">-</p>
 
       <!-- trade_price가 있으면 세자리마다 쉼표 추가 -->
-      <p v-else class="mr-2 text-[15px] lg:text-base">
+      <p v-else class="mr-2">
         ₩ {{ market.trade_price ? market.trade_price.toLocaleString() : "-" }}
       </p>
 
       <p
         :class="[
-          'min-w-16 text-right text-[15px] lg:min-w-20 lg:text-base',
+          'min-w-16 text-right text-[14px] lg:min-w-32',
           priceChangeClass,
         ]"
       >
@@ -30,6 +33,10 @@
         }}%
       </p>
     </div>
+    <div
+      class="absolute bottom-0 left-4 h-[1px] bg-zinc-900 group-hover:hidden"
+      style="width: calc(100% - 32px)"
+    />
   </div>
 </template>
 
@@ -90,6 +97,6 @@ const priceChangeClass = computed(() => {
 }
 .number-text {
   font-family: "Poppins", sans-serif;
-  font-weight: 500;
+  font-weight: 400;
 }
 </style>

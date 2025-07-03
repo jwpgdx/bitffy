@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Background :background="4"/>
     <img
       src="/images/page-support.webp"
       alt="에어드랍 코인 이미지"
@@ -43,6 +44,7 @@ import { useRouter, useRoute } from "vue-router";
 import { MessageCircle, Mail } from "lucide-vue-next";
 import Faq from "@/components/faq/Faq.vue";
 import FaqCard from "@/components/faq/FaqCard.vue";
+import Background from "@/components/Background.vue";
 
 const router = useRouter();
 const route = useRoute();

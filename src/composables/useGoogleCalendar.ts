@@ -1,5 +1,18 @@
 import { ref } from 'vue'
 
+export const EXCHANGES = [
+  { code: 'bithumb', name: '빗썸', icon: '/images/icon-bithumb.webp' },
+  { code: 'coinone', name: '코인원', icon: '/images/icon-coinone.webp' },
+  { code: 'binance', name: '바이낸스', icon: '/images/icon-binance.webp' },
+  { code: 'korbit', name: '코빗', icon: '/images/icon-korbit.webp' },
+  { code: 'upbit', name: '업비트', icon: '/images/icon-upbit.webp' },
+]
+
+export const getExchangeName = (code: string): string => {
+  const found = EXCHANGES.find(e => e.code === code)
+  return found ? found.name : code
+}
+
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY
 const SCOPES = 'https://www.googleapis.com/auth/calendar.events'
@@ -46,17 +59,6 @@ export function useGoogleCalendar() {
       apiKey: API_KEY,
       discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
     })
-  }
-
-  const getExchangeName = (code: string): string => {
-    const map: Record<string, string> = {
-      bithumb: '빗썸',
-      coinone: '코인원',
-      binance: '바이낸스',
-      korbit: '코빗',
-      upbit: '업비트',
-    }
-    return map[code] || code
   }
 
   // 🔧 "2025-05-03T00:00" → "2025-05-03"

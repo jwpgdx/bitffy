@@ -1,14 +1,14 @@
 <template>
   <div class="relative mx-auto">
+    <Background :background="1" />
     <HomeMain />
+    <HomeFeats />
     <div class="h-12 lg:h-24" />
     <HomeBanners />
     <div class="h-12 lg:h-24" />
     <HomeContents />
     <div class="h-12 lg:h-24" />
     <HomeBanner />
-
-   
 
     <div class="h-12 lg:h-24" />
 
@@ -47,11 +47,15 @@
 <script lang="ts" setup>
 import MarketList from "@/components/MarketList.vue"; // MarketList 컴포넌트 추가
 import HomeMain from "@/components/home/HomeMain.vue"; // MarketList 컴포넌트 추가
+import HomeFeats from "@/components/home/HomeFeats.vue"; // MarketList 컴포넌트 추가
+
 import HomeBanner from "@/components/home/HomeBanner.vue"; // MarketList 컴포넌트 추가
 import HomeBanners from "@/components/home/HomeBanners.vue"; // MarketList 컴포넌트 추가
 import HomeFooter from "@/components/home/HomeFooter.vue"; // MarketList 컴포넌트 추가
+
 import Faq from "@/components/faq/Faq.vue";
 import HomeContents from "@/components/home/HomeContents.vue"; // MarketList 컴포넌트 추가
+import Background from "@/components/Background.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -65,8 +69,8 @@ import HomeContents from "@/components/home/HomeContents.vue"; // MarketList 컴
   height: 240px;
   background: linear-gradient(
     to bottom,
-    rgba(12, 12, 12, 0) 0%,
-    rgba(12, 12, 12, 1) 80%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 80%
   );
   pointer-events: none; /* 버튼 클릭 방지 해제 */
 }

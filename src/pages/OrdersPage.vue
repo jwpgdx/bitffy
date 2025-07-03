@@ -3,25 +3,28 @@
     <Banner />
     <div class="tabs-container">
       <div class="relative w-full h-10 flex justify-between gap-6 text-base">
-        <div class="flex gap-4 lg:gap-6 text-base">
+        <div class="flex gap-4 lg:gap-6 text-sm uppercase tracking-[0.7px]">
           <button
             @click="activeTab = 'market'"
             :class="[
-              'py-2 px-2 font-semibold focus:outline-none',
+              'py-2 px-2  focus:outline-none',
               activeTab === 'market'
-                ? 'border-b-2 border-orange-500 text-white'
-                : 'text-zinc-500 hover:text-zinc-700',
+              ? 'border-b-2 border-orange-500 text-white'
+              : 'opacity-50 hover:opacity-70',
             ]"
           >
             원화 마켓
           </button>
+
+      
+
           <button
             @click="activeTab = 'favorite'"
             :class="[
-              'py-2 px-2 font-semibold focus:outline-none',
+              'py-2 px-2  focus:outline-none',
               activeTab === 'favorite'
-                ? 'border-b-2 border-orange-500 text-white'
-                : 'text-zinc-500 hover:text-zinc-700',
+              ? 'border-b-2 border-orange-500 text-white'
+              : 'opacity-50 hover:opacity-70',
             ]"
           >
             즐겨찾기
@@ -57,6 +60,10 @@
             </span>
           </div>
         </div>
+        <div
+          class="absolute bottom-0 left-1/2 h-[1px] w-[100vw] bg-white opacity-10"
+          style="transform: translateX(-50%)"
+        ></div>
       </div>
     </div>
 
@@ -110,8 +117,8 @@ onClickOutside(searchContainer, (event) => {
   padding: 32px 0;
   background: linear-gradient(
     to bottom,
-    rgba(12, 12, 12, 1) 80%,
-    rgba(12, 12, 12, 0) 100%
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0) 100%
   );
 }
 </style>

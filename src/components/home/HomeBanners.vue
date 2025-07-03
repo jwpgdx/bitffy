@@ -93,8 +93,8 @@ const bannerCards = [
   width: calc(100vw - 1024px);
   background: linear-gradient(
     to right,
-    rgba(12, 12, 12, 0) 0%,
-    rgba(12, 12, 12, 1) 50%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 50%
   );
   pointer-events: none; /* 버튼 클릭 방지 해제 */
   z-index: 2;

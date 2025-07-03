@@ -31,9 +31,7 @@ onBeforeMount(() => {
 </script>
 
 <style lang="scss" scoped>
-#app {
-  background-color: #0c0c0c;
-}
+
 
 .router-view-wrapper {
   margin: 0 auto;

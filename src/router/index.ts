@@ -33,7 +33,7 @@ const routes = [
       layout: {
         showBack: false,
         showLogo: true,
-        showMargin: true,
+        showMargin: false,
       },
     }
   },

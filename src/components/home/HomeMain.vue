@@ -1,12 +1,13 @@
 <template>
-  <div class="container">
-    <div class="relative flex w-full flex-col gap-6 lg:flex-row">
+  <div class="container mt-20 h-[80vh] lg:mt-0 lg:h-[100vh]">
+    <div class="relative flex h-full w-full flex-col gap-6 lg:flex-row">
       <div
         class="relative flex flex-1 flex-col items-center justify-center text-center text-white lg:items-start lg:text-left"
       >
-        <h1 class="main-text">Explore<br>Crypto Galaxies</h1>
+        <h1 class="main-text">Explore<br />Crypto Galaxies</h1>
         <p class="sub-text">
-          다양한 에어드랍 이벤트를 참여하고,<br>미션과 보상으로 나만의 여정을 시작하세요.
+          다양한 에어드랍 이벤트를 참여하고,<br />미션과 보상으로 나만의 여정을
+          시작하세요.
           <!--
           The 'Evolution of Life' as told by BITFFY. Be a part of the dawn of a
           new civilization.
@@ -14,8 +15,9 @@
           <!--가장 빠르게, 가장 정확하게 실시간 에어드랍 정보로 누구보다 먼저 기회를
           잡으세요.-->
         </p>
+
         <button
-          class="h-12 rounded-3xl border border-orange-500 px-4 text-orange-500"
+          class="h-12 rounded-3xl border border-white px-4 text-white"
           @click="onButtonClick"
         >
           에어드랍 이벤트 참여하기
@@ -40,20 +42,20 @@ const onButtonClick = () => {
 .main-text {
   font-size: clamp(32px, 5.46875vw, 70px);
   line-height: 1.17143;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.015em;
   margin-bottom: clamp(14px, 1.95312vw, 28px);
   font-family: "Poppins", sans-serif;
 }
 
 .sub-text {
-  font-size: clamp(16px, 1.8vw, 24px);
+  font-size: clamp(16px, 1.8vw, 20px);
   line-height: clamp(1.5, 1.58333, 1.66667);
-  font-weight: 400;
+  font-weight: 200;
   letter-spacing: -0.015em;
   margin-bottom: clamp(20px, 3.51562vw, 60px);
 
-  @apply text-zinc-400;
+  @apply text-white;
 }
 @media only screen and (max-width: 480px) {
   .main-text {

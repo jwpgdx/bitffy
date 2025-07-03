@@ -6,6 +6,7 @@ import Vue3Toastify from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 import router from './router'; // router 추가
 import './assets/index.css'; // TailwindCSS 스타일 추가
+import '@lottiefiles/lottie-player';
 
 const app = createApp(App);
 
